@@ -1,0 +1,14 @@
+bytes        name
+1:2          short width
+3:2          short height
+4:2          short numobjects
+6:1          byte numcolors
+7:3*{6}      struct[...] colors {
+             byte R; byte G; byte B
+             }
+8:15*{4}     struct[...] objects {
+             byte id; byte shape; int XYZW /* each power of 256 is a rotation */; int rotationXYZW; int sizeXYZW; bool storesData; null*7;
+             }
+9:EOF        ?[...] objdata {
+             byte id; ... data /*every 7F is escaped*/; 7F;
+             }
